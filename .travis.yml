@@ -69,5 +69,5 @@ jobs:
       language: python
       script:
         - sudo pip install python-coveralls
-        - coverage run --source=datajoint setup.py tests
+        - coverage run --source=datajoint setup.py test
         - coveralls
