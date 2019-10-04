@@ -25,6 +25,8 @@ services:
       - PYTHON_USER=dja
       - JUPYTER_PASSWORD=datajoint
       - DISPLAY
+      - COVERALLS_SERVICE_NAME=travis-ci
+      - COVERALLS_REPO_TOKEN=fd0BoXG46TPReEem0uMy7BJO5j0w1MQiY
     working_dir: /src
     command: >
       /bin/sh -c
