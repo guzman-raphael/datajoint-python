@@ -67,6 +67,7 @@ jobs:
     - stage: Coverage
       dist: xenial
       language: python
+      python: 3.7
       script:
         - pip install coveralls
         - coverage run --source=datajoint setup.py test
