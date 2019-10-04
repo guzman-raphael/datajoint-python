@@ -68,6 +68,6 @@ jobs:
       dist: xenial
       language: python
       script:
-        - pip install --user coveralls
+        - pip install coveralls
         # - coverage run --source=datajoint setup.py test
         - coveralls
