@@ -65,8 +65,8 @@ jobs:
     #   - PY_VER: "3.5"
     #   - MYSQL_VER: "5.6"
     - stage: Coverage
-      os: linux
-      language: shell
+      dist: xenial
+      language: python
       script:
         - sudo pip install python-coveralls
         - coverage run --source=datajoint setup.py tests
