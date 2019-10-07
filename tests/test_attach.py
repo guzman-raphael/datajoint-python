@@ -52,11 +52,11 @@ def test_attach_attributes():
     assert_equal(p2, path2[0])
 
 
-def test_external_paths():
-    assert_true(Path(schema.external['local'].fetch_external_paths()[0][1]).exists())
+# def test_external_paths():
+#     assert_true(Path(schema.external['local'].fetch_external_paths()[0][1]).exists())
 
-    download_folder = Path(tempfile.mkdtemp())
-    keys, path = table.fetch("KEY", 'neg', download_path=download_folder, order_by="KEY")
-    p1, p2 = (Attach & keys[0]).fetch1('img', 'txt', download_path=download_folder)
-    # print(schema.external['local'].fetch_external_paths()[0][1])
-    # print(len(schema.external['local'].fetch_external_paths()))
+#     download_folder = Path(tempfile.mkdtemp())
+#     keys, path = table.fetch("KEY", 'neg', download_path=download_folder, order_by="KEY")
+#     p1, p2 = (Attach & keys[0]).fetch1('img', 'txt', download_path=download_folder)
+#     # print(schema.external['local'].fetch_external_paths()[0][1])
+#     # print(len(schema.external['local'].fetch_external_paths()))
