@@ -31,19 +31,20 @@ services:
     command: >
       /bin/sh -c
        "
-        pip install --user nose nose-cov coveralls .;
-        pip freeze | grep datajoint;
-        nosetests -vsw tests --with-coverage --cover-package=datajoint;
-        coveralls;
-        # jupyter notebook;
+        # pip install --user nose nose-cov coveralls .;
+        # pip freeze | grep datajoint;
+        # nosetests -vsw tests --with-coverage --cover-package=datajoint;
+        # coveralls;
+        jupyter notebook;
        "
-    # ports:
-    #   - "8888:8888"
+    ports:
+      - "8888:8888"
     user: ${UID}:${GID}
     volumes:
       - .:/src
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      # - ./notebooks:/home/dja/notebooks
+      - ./notebooks:/home/dja/notebooks
+      - ../dj-python-101:/home/dja/dj-python-101
   db:
     <<: *net
     image: datajoint/mysql:$MYSQL_VER

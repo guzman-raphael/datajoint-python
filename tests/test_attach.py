@@ -4,7 +4,12 @@ import tempfile
 from pathlib import Path
 import os
 
-from .schema_external import Attach
+from .schema_external import Attach, stores_config, schema
+import datajoint as dj
+
+
+# def setUp(self):
+#     dj.config['stores'] = stores_config
 
 
 def test_attach_attributes():
@@ -21,7 +26,11 @@ def test_attach_attributes():
         data2 = os.urandom(200)
         with attach2.open('wb') as f:
             f.write(data2)
-        table.insert1(dict(attach=i, img=attach1, txt=attach2))
+        attach3 = Path(source_folder, 'attach3.neg')
+        data3 = os.urandom(300)
+        with attach3.open('wb') as f:
+            f.write(data3)
+        table.insert1(dict(attach=i, img=attach1, txt=attach2, neg=attach3))
 
     download_folder = Path(tempfile.mkdtemp())
     keys, path1, path2 = table.fetch("KEY", 'img', 'txt', download_path=download_folder, order_by="KEY")
@@ -42,3 +51,12 @@ def test_attach_attributes():
     assert_equal(p1, path1[0])
     assert_equal(p2, path2[0])
 
+
+def test_external_paths():
+    assert_true(Path(schema.external['local'].fetch_external_paths()[0][1]).exists())
+
+    download_folder = Path(tempfile.mkdtemp())
+    keys, path = table.fetch("KEY", 'neg', download_path=download_folder, order_by="KEY")
+    p1, p2 = (Attach & keys[0]).fetch1('img', 'txt', download_path=download_folder)
+    # print(schema.external['local'].fetch_external_paths()[0][1])
+    # print(len(schema.external['local'].fetch_external_paths()))

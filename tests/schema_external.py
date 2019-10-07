@@ -97,8 +97,9 @@ class Attach(dj.Manual):
     # table for storing attachments
     attach : int
     ----
-    img : attach@share    #  attachments are stored as specified by: dj.config['stores']['raw']
+    img : attach@share    #  attachments are stored as specified by: dj.config['stores']['share']
     txt : attach      #  attachments are stored directly in the database
+    neg : attach@local   # objects are stored as specified by dj.config['stores']['local']
     """
 
 
